@@ -1,0 +1,26 @@
+{
+    "editor.tabSize": 2,
+    "path-autocomplete.extensionOnImport": true,
+    "path-autocomplete.excludedItems": {
+        "**/*.js": { "when": "**/*.ts" }, // ignore js files if i'm inside a ts file
+        "**/*.map": { "when": "**" }, // always ignore *.map files
+        "**/{.git,node_modules}": { "when": "**" } // always ignore .git and node_modules folders
+      },
+      "path-autocomplete.pathMappings": {
+        "@": "${folder}/src",
+        "@views" : "${folder}/src/views",
+        "@components": "${folder}/src/components",
+        "@network": "${folder}/src/network",
+        "@images": "${folder}/src/assets/images",
+        "@css": "${folder}/src/assets/css",
+        //
+        "~@": "${folder}/src",
+        "~@views" : "${folder}/src/views",
+        "~@components": "${folder}/src/components",
+        "~@network": "${folder}/src/network",
+        "~@images": "${folder}/src/assets/images",
+        "~@css": "${folder}/src/assets/css",
+
+      },
+      "liveServer.settings.port": 5501,
+}

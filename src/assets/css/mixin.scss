@@ -1,0 +1,7 @@
+@mixin wh100 {
+    width: 100%;
+    height: 100%;
+}
+@mixin bkgc($color) {
+    background-color: $color;
+}
