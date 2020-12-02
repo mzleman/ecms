@@ -6,6 +6,8 @@ import router from './router'
 import '@css/reset.css';
 
 import '@/plugins'
+import http from '@/network/request.js'
+Vue.prototype.$http = http;
 
 Vue.config.productionTip = false
 

@@ -5,15 +5,15 @@
       <div class="login-logo">
         <img src="@images/logo.png" alt="">
       </div>
-      <el-form class="login-form" ref="login-form" :model="loginData" label-width="50px" label-position="top">
-          <el-form-item label="用户" prop="pass">
-            <el-input type="text" v-model="loginData.user" autocomplete="off"></el-input>
+      <el-form class="login-form" ref="login-form" :model="loginData" :rules="rules" label-width="50px" label-position="top">
+          <el-form-item label="用户" prop="username">
+            <el-input type="text" v-model="loginData.username" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="checkPass">
+          <el-form-item label="密码" prop="password">
             <el-input type="password" v-model="loginData.password" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary"> 提交 </el-button>
+            <el-button type="primary" @click="login"> 提交 </el-button>
             <el-button @click="resetForm('login-form')"> 重置 </el-button>
           </el-form-item>
       </el-form>
@@ -22,19 +22,34 @@
 </template>
 
 <script>
+import {validateUser, validatePass} from './validate'
+import {login} from './funcs'
+import {getUserToken} from '@/state/token'
 export default {
   name: 'Login',
   data() {
     return {
       loginData: {
-        user: '',
+        username: '',
         password: ''
+      }, 
+      rules: {
+        username: [
+          {validator: validateUser, trigger: 'blur'}],
+        password: [
+          {validator: validatePass, trigger: 'blur'}]
       }
     }
   },
   methods: {
-    resetForm(formName) {
+    login,
+    resetForm: function (formName) {
       this.$refs[formName].resetFields();
+    }
+  },
+  created() {
+    if(getUserToken()) {
+      this.$router.replace('/user');
     }
   }
 }
@@ -44,6 +59,7 @@ export default {
   .login {
     position: relative;
   }
+
   .mask {
     position: fixed;
     z-index: -1;
@@ -54,6 +70,7 @@ export default {
     background-attachment: fixed;
     background-size: cover;
   }
+
   .form-container {
     position: fixed;
     left: 0;
@@ -67,7 +84,6 @@ export default {
     box-sizing: border-box;
     background-color: rgba($color: #fff, $alpha: 0.9);
     border-radius: 10px;
-    
     .login-logo {
       position:absolute;
       left: 0;
