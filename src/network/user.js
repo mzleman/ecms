@@ -1,7 +1,7 @@
 import http from './request'
 
 export function userLogin(signInData) {
-  const url = '/private/v1/login';
+  const url = '/login';
   return http.get(url, {
     params: signInData
   })

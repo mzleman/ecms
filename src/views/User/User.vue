@@ -4,6 +4,9 @@
     <div class="info">
       <h2>当前用户：{{user}}</h2>
       <br>
+      <h2>{{meta.index}}</h2>
+      <el-button type="primary" @click="add">点击</el-button>
+      <el-button @click="back">返回</el-button>
       <el-button @click="signOut">退出</el-button>
     </div>
   </div>
@@ -14,7 +17,10 @@ import {getUserToken, delUserToken} from '@/state/token'
 export default {
   data() {
     return {
-      user: undefined
+      user: undefined,
+      meta: {
+        index: 0
+      }
     }
   },
   methods: {
@@ -23,10 +29,21 @@ export default {
         this.$message.warning('退出登录');
         this.$router.replace('/login');
       }
+    },
+    back() {
+      this.$router.back();
+    },
+    add() {
+      this.meta.index++;
     }
   },
   created() {
     this.user = JSON.parse(getUserToken()).username;
+  },
+  watch: {
+    ['meta.index']: function(newVal, oldVal) {
+      alert(oldVal);
+    }
   }
 }
 </script>

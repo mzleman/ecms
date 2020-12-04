@@ -3,7 +3,9 @@
     <div class="mask"></div>
     <div class="form-container">
       <div class="login-logo">
-        <img src="@images/logo.png" alt="">
+        <a href="#/home">
+          <img src="@images/logo.png" alt="">
+        </a>
       </div>
       <el-form class="login-form" ref="login-form" :model="loginData" :rules="rules" label-width="50px" label-position="top">
           <el-form-item label="用户" prop="username">
