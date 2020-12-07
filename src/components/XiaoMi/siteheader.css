@@ -1,0 +1,195 @@
+div.site-header-container{
+    width: auto;
+    height: 100px;
+    position: relative;
+}
+div.site-header{
+    height: 100px;
+}
+h1.site-header-logo{
+    width: 50px;
+    height: 50px;
+    float: left;
+    background-color: #FF6700;
+    margin-top: 25px;
+    position: relative;
+    overflow: hidden;
+    text-indent: -99999px;
+}
+h1.site-header-logo a::before{
+    content: '';
+    background-image: url("~@images/mi-logo.png");
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 0;
+    transition: left 0.25s;
+}
+h1.site-header-logo a::after{
+    content: '';
+    background-image: url("~@images/mi-home.png");
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: -50px;
+    transition: left 0.25s;
+}
+h1.site-header-logo a:hover::before{
+    left: 50px;
+}
+h1.site-header-logo a:hover::after{
+    left:0px;
+}
+ul.site-header-nav{
+    margin:10px 7px;
+    height: 90px;
+    float: left;
+    padding-left: 60px;
+    margin-bottom: 0px;
+}
+ul.site-header-nav li{
+    margin-top: 15px;
+    line-height: 50px;
+    height: 80px;
+    float: left;
+    padding:0px 8px;
+}
+ul.site-header-nav>li:first-child{
+    position: relative;
+    visibility: hidden;
+}
+ul.site-header-nav li a{
+    display: block;
+    font-size: 16px;
+    color: black    ;
+}
+ul.site-header-nav li a:hover{
+    color: #FF6700;
+    /* color: #fff; */
+}
+ul.site-header-nav div.site-header-down{
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    left: 0;
+    top: 100px;
+    transition: height 0.3s;
+    background-color: #fff;
+}
+ul.site-header-nav li:not(:first-of-type):not(:last-of-type):not(:nth-last-of-type(2)):hover~div.site-header-down,
+ul.site-header-nav div.site-header-down:hover
+{
+    height: 200px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+div.site-header-form{
+    float: right;
+    height: 100px;
+}
+div.site-header-form form{
+    height: 80px;
+    margin-top: 10px;
+    width: 255px;
+    border: none;
+    position: relative;
+}
+div.site-header-form input{
+    width: 160px;
+    float: left;
+    height: 38px;
+    border: 1px solid #E0E0E0;
+    margin-top: 20px;
+    padding: 0px;
+    padding-left: 10px;
+    outline: none;
+}
+div.site-header-form input:focus,
+div.site-header-form input:focus+button
+{   
+    border-color: #FF6700;
+}
+div.site-header-form button{
+    float: left;
+    height: 38px;
+    background-color: #fff ;
+    color: #616161;
+    line-height: 38px;
+    border: 1px solid #E0E0E0;
+    border-left: none;
+    width: 38px;
+    padding: 0px;
+    margin-top: 20px;
+    box-sizing: content-box;
+}
+div.site-header-form button:hover{
+    background-color: #FF6700;
+    color: #fff;
+    border-color: transparent;
+}
+div.site-header-form div.site-header-textfocus{
+    display: none;
+    width: 170px;
+    height: 100px;
+    background-color: #fff;
+    position:absolute;
+    z-index: 3;
+    border:1px solid #FF6700;
+    border-top: none;
+    top: 60px;
+    color: #aaaaaa;
+    font-size: 12px;
+    text-indent: 1em;
+    line-height: 25px;
+}
+div.site-header-form input:focus~div.site-header-textfocus{
+    display: block;
+}
+div.allgoods-sidebar ul{
+    position: absolute;
+    z-index: 5;
+    width: 234px;
+    height: 420px;
+    background-color: rgba(105,101,101,.6);
+    visibility:visible;
+    left: -117px;
+    top: 75px;
+    padding: 20px 0;
+}
+div.allgoods-sidebar ul li {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    line-height: 42px;
+    overflow: hidden;
+}
+div.allgoods-sidebar ul li a:hover{
+    color: #fff;
+}
+div.allgoods-sidebar ul li a{
+    color: #fff;
+    font-size: 14px;
+    overflow: hidden;
+}
+div.allgoods-sidebar ul li:hover{
+    background-color: #FF6700;
+}
+div.allgoods-sidebar ul li a span{
+    float: left;
+    margin-left: 25px;
+}
+div.allgoods-sidebar ul li a i{
+    float:right;
+    line-height: 42px;
+    margin-right: 20px;
+}
+div.allgoods-sidebar ul li a i::before{
+    vertical-align: -1px;
+}

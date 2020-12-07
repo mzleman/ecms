@@ -1,0 +1,75 @@
+div.hero.wrapper{
+    margin-top: 10px;
+}
+ul.hero-left{
+    list-style: none;
+    padding: 3px;
+    width: 228px;
+    display: flex;
+    background-color: #5F5750;
+    flex-direction: row;
+    flex-wrap: wrap;
+    float: left;
+}
+ul.hero-left li{
+    list-style: none;
+    width: 76px;
+    height: 82px;
+    position: relative;
+}
+ul.hero-left li i{
+    color: #C1BDBB;
+    display: block;
+    font-weight: normal;
+    text-align: center;
+    font-size: 12px;
+}
+ul.hero-left li a{
+    display: block;
+}
+ul.hero-left li i::before{
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    margin: 15px 0;
+    color: #C1BDBB;
+    font-weight: 900;
+}
+ul.hero-left li i:hover,
+ul.hero-left li i:hover::before{
+    color: #ffffff;
+}
+ul.hero-left li::before{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 1px;
+    width: 64px;
+    background-color: #665E57;
+    left: 5px;
+}
+ul.hero-left li::after{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 70px;
+    width: 1px;
+    background-color: #665E57;
+    top: 5px;
+}
+ul.hero-right{
+    width: 978px;
+    height: 170px;
+    /* background-color: red; */
+    float: right;
+    display: flex;
+}
+ul.hero-right li{
+    width: 316px;
+    height: 170px;
+    margin-right: 15px;
+}
+ul.hero-right li img{
+    height: 100%;
+    vertical-align: bottom;
+}

@@ -8,6 +8,7 @@
 @import "@css/mixin";
 html, body {
   height: 100%;
+  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

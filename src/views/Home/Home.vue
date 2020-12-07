@@ -1,25 +1,25 @@
 <template>
   <el-container class="home">
-    <el-header>
+    <el-header height="60px">
       <header class="">
         <img src="~@images/ecms.png" alt="" height="50px">
         <h1>电商管理系统</h1>
       </header>
       <div>
-        <el-button @click="signIn">登录</el-button>
+        <el-button @click="toUserInfo">用户</el-button>
         <el-button type="primary" @click="signOut">
           退出登录
         </el-button>
       </div>
     </el-header>
-    <el-container>
+    <el-container class="aside main">
       <el-aside width="245px">
-        <el-menu active-text-color="red" unique-opened>
-          <el-submenu v-for="main in menuInfo" :key="main.id" :index="main.id + ''"> 
+        <el-menu  active-text-color="#26A59A" unique-opened>
+          <el-submenu v-for="main in menuInfo" :key="main.id" :index="main.id + ''" @click.native="menuClick(main)"> 
             <template slot="title">
               {{ main.authName }}
             </template>
-            <el-menu-item v-for="sub in main.children" :key="sub.id">
+            <el-menu-item v-for="sub in main.children" :key="sub.id" :index="sub.id + ''">
               <template slot="title">
               {{ sub.authName }}
               </template>
@@ -28,7 +28,7 @@
         </el-menu>
       </el-aside>
       <el-main>
-
+        <router-view/>
       </el-main>
     </el-container>
   </el-container>
@@ -46,8 +46,8 @@ export default {
     }
   },
   methods: {
-    signIn() {
-      this.$router.push('/login')
+    toUserInfo() {
+      this.$router.push('/user')
     },
     signOut() {
       if (delUserToken()) {
@@ -66,6 +66,9 @@ export default {
         this.menuInfo = res.data;
         console.log(this.menuInfo);
       }
+    },
+    menuClick(item) {
+      this.$router.push(item.path);
     }
   },
   created() {
@@ -98,6 +101,9 @@ export default {
       align-items: center;
     }
   }
+  .el-container.aside.main {
+    height: 100%;
+  }
   .el-aside {
     background-color: bisque;
     background-color: #323744;
@@ -110,14 +116,26 @@ export default {
       background-color: transparent;
     }
   }
-  // /deep/ .el-submenu {
-  //     background-color: transparent;
-  //     div.el-submenu__title {
-  //       background-color: transparent;
-  //     }
-  // }
 
   .el-main {
-    background-color: cadetblue;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0;
+    // background-color: cadetblue;
+    background-color: #fff;
+    position: relative;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 99, 71, .3);
+      // background-color: #fff;
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 99, 71, .9);
+      border-radius: 2px;
+    }
   }
 </style>>

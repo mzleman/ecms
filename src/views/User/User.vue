@@ -2,7 +2,7 @@
   <div>
     <div class="mask"></div>
     <div class="info">
-      <h2>当前用户：{{user}}</h2>
+      <h2>当前用户：{{user.username}}</h2>
       <br>
       <h2>{{meta.index}}</h2>
       <el-button type="primary" @click="add">点击</el-button>
@@ -38,7 +38,12 @@ export default {
     }
   },
   created() {
-    this.user = JSON.parse(getUserToken()).username;
+    const user = JSON.parse(getUserToken());
+    if(user && user.username) {
+      this.user = user;
+    } else {
+      this.$router.replace('/login');
+    }
   },
   watch: {
     ['meta.index']: function(newVal, oldVal) {

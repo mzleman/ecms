@@ -4,6 +4,8 @@ import router from './router'
 
 //重置样式表
 import '@css/reset.css';
+// font-awsome
+import '@/assets/fonts/font-awsome/css/all.css'
 
 import '@/plugins'
 import http from '@/network/request.js'

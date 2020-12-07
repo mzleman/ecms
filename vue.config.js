@@ -19,11 +19,11 @@ module.exports = {
           '@network': resolve('src/network')
       }
     },
-    // plugins: [
-    //   new webpack.ProvidePlugin({
-    //       $: 'jquery',
-    //       jQuery: 'jquery'
-    //   })
-    // ]
+    plugins: [
+      new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery'
+      })
+    ]
   }
 }

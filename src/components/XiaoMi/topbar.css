@@ -1,0 +1,123 @@
+/* 顶部导航栏的样式 */
+.top-wrapper{
+    width: auto;
+    background-color: #333333;
+    height: 40px;
+    line-height: 40px;
+    color:#B0B0B0 ;
+    font-size: 12px;
+    line-height: 40px;
+}
+.top-nav a{
+    color: inherit;
+    display: block;
+}
+.top-nav a:hover{
+    color: #ffffff;
+}
+
+.top-nav li,.top-nav-left span,.top-nav-right span{
+    float: left;
+}
+
+.top-nav-right,.top-shop-cart{
+    float: right;
+}
+
+.top-nav-left span,.top-nav-right span{
+    margin: 0 8px;
+    color: #3E423B;
+}
+.top-nav-right{
+    margin-right: 20px;
+}
+.top-shop-cart{
+    width: 125px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #424242;
+}
+.top-shop-cart i{
+    font-size: 12px;
+}
+.top-shop-cart span {
+    margin: 0 5px;
+}
+#topbar-download-app{
+    position: relative;
+}
+#topbar-download-app .arrow-wrapper{
+    /* display: block; */
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    top:0px;
+}
+#topbar-download-app:hover .arrow-wrapper{
+    display: block;
+}
+#topbar-download-app .arrow-wrapper i.fas{
+    font-size: 20px;
+    line-height: 20px;
+    vertical-align: -20px;
+    color: white;
+}
+
+#topbar-download-app .drawdown-download-app{
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    width: 300%;
+    height: 0;
+    /* display: block; */
+    left: -100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 16px;
+    color: #333333;
+    /* border:1px solid #D9D9D9; */
+    border-top: none;
+    box-shadow: 0 1px 3px rgba(0,0, 0, 0.1);
+    overflow: hidden;
+    transition: height 0.3s;
+}
+
+#topbar-download-app:hover .drawdown-download-app{
+    height: 140px;
+}
+#topbar-download-app .drawdown-download-app img{
+    width: 70%;
+    margin: 8px 15%;
+}
+.top-shop-cart{
+    position: relative;
+}
+.top-shop-cart div{
+    position: absolute;
+    z-index: 30;
+    background-color: #ffffff;
+    right: 0;
+    width: 255px;
+    height: 0px;
+    top: 40px;
+    /* border:1px solid #D9D9D9; */
+    border-top: none;
+    box-shadow: 0 1px 3px rgba(0,0, 0, 0.1);
+    text-align: center;
+    line-height: 300px;
+    color: #333333;
+    font-size: 16px;
+    overflow: hidden;
+    transition:height 0.3s;
+    /* display: none; */
+}
+.top-shop-cart:hover,.top-shop-cart a:hover{
+    color: #FF6700;
+    background-color: #ffffff;
+}
+.top-shop-cart:hover div{
+    /* display: block; */
+    height: 300px;
+}
