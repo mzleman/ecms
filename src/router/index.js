@@ -4,7 +4,8 @@ import {getUserToken} from '@/state/token'
 
 const Login = () => import('@views/Login/Login.vue');
 const Home = () => import('@views/Home/Home.vue');
-const User = () => import('@views/User/User.vue');
+const Users = () => import('@views/Home/ChildCompos/Users.vue');
+const Profile = () => import('@views/Profile/Profile.vue');
 const XiaoMi = () => import('@components/XiaoMi/XiaoMi.vue');
 
 Vue.use(VueRouter)
@@ -21,14 +22,17 @@ const routes = [
       {
         path: 'welcome',
         component: XiaoMi
+      }, {
+        path: 'users',
+        component: Users
       }
     ]
   }, {
     path: '/login',
     component: Login
   }, {
-    path: '/user',
-    component: User
+    path: '/profile',
+    component: Profile
   }
 ]
 

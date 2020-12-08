@@ -20,6 +20,7 @@ http.interceptors.request.use( config => {
   if(userToken) {
     config.headers.Authorization = JSON.parse(userToken).token;
   }
+  // console.log(config);
   return config;
  }, err => {
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" @keydown="ifEnterDown">
     <div class="mask"></div>
     <div class="form-container">
       <div class="login-logo">
@@ -15,7 +15,7 @@
             <el-input type="password" v-model="loginData.password" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="login"> 提交 </el-button>
+            <el-button type="primary" @click="login"> 登录 </el-button>
             <el-button @click="resetForm('login-form')"> 重置 </el-button>
           </el-form-item>
       </el-form>
@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import {validateUser, validatePass} from './validate'
-import {login} from './funcs'
-import {getUserToken} from '@/state/token'
+import {validateUser, validatePass, validateForm} from '@/utils/validate.js'
+// import {login} from './funcs'
+import {getUserToken, saveUserToken} from '@/state/token'
 export default {
   name: 'Login',
   data() {
@@ -44,14 +44,48 @@ export default {
     }
   },
   methods: {
-    login,
+    // 登录按钮单击响应函数
+    async login() {
+      const isValidUser = (res) => {return res.meta.status === 200 && res.data && res.data.token};
+      let res;
+      try {
+        await validateForm(this.$refs['login-form']);
+      } catch (e) {
+        return this.$message.error('请输入正确的登录信息');
+      }
+      try {
+        res = await this.$http.get('login', {
+          params: this.loginData
+        })
+      } catch (e) {
+        return this.$message.error('网络波动，请稍后再试');
+      }
+      if (isValidUser(res)) {
+        this.$message.success({
+          message: '登陆成功',
+          duration: 1000
+        });
+        saveUserToken(res.data);
+        this.$router.replace('/home');
+      } else {
+        this.$message.error('用户名或密码错误');
+      }
+    },
+    // 重置按钮单击响应函数
     resetForm: function (formName) {
       this.$refs[formName].resetFields();
+    },
+    // 在组件内敲击enter键进行登录
+    ifEnterDown(event) {
+      if(event.key === 'Enter') {
+        this.login();
+      }
     }
   },
-  created() {
+  activated() {
+    // 如果本地存在token则跳转至用户信息页面
     if(getUserToken()) {
-      this.$router.replace('/user');
+      this.$router.replace('/profile');
     }
   }
 }

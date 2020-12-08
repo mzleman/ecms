@@ -4,8 +4,8 @@
     <div class="info">
       <h2>当前用户：{{user.username}}</h2>
       <br>
-      <h2>{{meta.index}}</h2>
-      <el-button type="primary" @click="add">点击</el-button>
+      <!-- <h2>{{meta.index}}</h2> -->
+      <!-- <el-button type="primary" @click="add">点击</el-button> -->
       <el-button @click="back">返回</el-button>
       <el-button @click="signOut">退出</el-button>
     </div>

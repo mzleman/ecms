@@ -10,7 +10,18 @@ import {
   Main,
   Menu,
   Submenu,
-  MenuItem
+  MenuItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  Table,
+  TableColumn,
+  Card,
+  Row,
+  Col,
+  Pagination,
+  Switch,
+  Tooltip,
+  Dialog
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Vue from 'vue'
@@ -25,5 +36,16 @@ Vue.use(Button)
   .use(Main)
   .use(Menu)
   .use(Submenu)
-  .use(MenuItem);
+  .use(MenuItem)
+  .use(Breadcrumb)
+  .use(BreadcrumbItem)
+  .use(Table)
+  .use(TableColumn)
+  .use(Card)
+  .use(Row)
+  .use(Col)
+  .use(Pagination)
+  .use(Switch)
+  .use(Tooltip)
+  .use(Dialog);
 Vue.prototype.$message = Message;

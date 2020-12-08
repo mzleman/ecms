@@ -1,8 +1,11 @@
 <template>
   <el-container class="home">
+    <!-- 顶部区域 -->
     <el-header height="60px">
       <header class="">
-        <img src="~@images/ecms.png" alt="" height="50px">
+        <a href="#/home">
+          <img src="~@images/ecms.png" alt="" height="50px">
+        </a>
         <h1>电商管理系统</h1>
       </header>
       <div>
@@ -12,24 +15,30 @@
         </el-button>
       </div>
     </el-header>
+    <!------>
     <el-container class="aside main">
+      <!-- 左侧边栏 -->
       <el-aside width="245px">
-        <el-menu  active-text-color="#26A59A" unique-opened>
-          <el-submenu v-for="main in menuInfo" :key="main.id" :index="main.id + ''" @click.native="menuClick(main)"> 
+        <el-menu active-text-color="#26A59A" unique-opened :default-active="activePath">
+          <el-submenu v-for="main in menuInfo" :key="main.id" :index="main.id + ''">
             <template slot="title">
               {{ main.authName }}
             </template>
-            <el-menu-item v-for="sub in main.children" :key="sub.id" :index="sub.id + ''">
+            <el-menu-item v-for="sub in main.children" :key="sub.id" :index="sub.path" @click.native="menuClick(sub)">
               <template slot="title">
-              {{ sub.authName }}
+                {{ sub.authName }}
               </template>
             </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
+      <!------>
+      
+      <!-- 主内容区域 -->
       <el-main>
         <router-view/>
       </el-main>
+      <!------>
     </el-container>
   </el-container>
 </template>
@@ -37,17 +46,19 @@
 
 <script>
 import {delUserToken} from '@/state/token'
+import {getActivePath, setActivePath} from './funcs.js'
 
 export default {
   name: 'Home',
   data() {
     return {
-      menuInfo: []
+      menuInfo: [],
+      activePath: undefined
     }
   },
   methods: {
     toUserInfo() {
-      this.$router.push('/user')
+      this.$router.push('/profile')
     },
     signOut() {
       if (delUserToken()) {
@@ -64,15 +75,17 @@ export default {
       }
       if(res.meta.status === 200) {
         this.menuInfo = res.data;
-        console.log(this.menuInfo);
+        // console.log(this.menuInfo);
       }
     },
     menuClick(item) {
+      setActivePath(item.path);
       this.$router.push(item.path);
     }
   },
   created() {
     this.getMenuList();
+    this.activePath = getActivePath();
   }
 }
 </script>
@@ -99,6 +112,9 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      img {
+        vertical-align: bottom;
+      }
     }
   }
   .el-container.aside.main {
