@@ -39,6 +39,14 @@ export const validateMobile = (rule, value, callback) => {
   callback();
 }
 
+// 表单项不得为空
+export const validateNotEmpty = (rule, value, callback) => {
+  if(value === '') {
+    return callback('请填写此内容')
+  }
+  callback();
+}
+
 // 登录时验证表单
 export const validateForm = function (elForm) {
   return new Promise( (resolve, reject) => {
@@ -48,3 +56,4 @@ export const validateForm = function (elForm) {
     });
   });
 }
+

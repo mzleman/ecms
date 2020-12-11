@@ -288,9 +288,9 @@ export default {
       }
   },
   mounted() {
+      let $imgs = $(".main-slideshow img");
       this.timer = setInterval(function () {
         var $activeA = $("ul.main-slideshow-nav a.active");
-        var $imgs = $(".main-slideshow img");
         var index = $activeA.index();
         // $imgs.eq(index).fadeToggle("slow","swing");
         $imgs.eq(index).fadeOut(1300);
@@ -302,21 +302,23 @@ export default {
         // $imgs.eq(index).addClass("active");
         var $next = $("ul.main-slideshow-nav a").eq(index).addClass("active");
         // $("ul.main-slideshow-nav a").eq(index).fadeToggle("slow","swing");
-    }, 4500);
+    }, 5000);
     $("ul.main-slideshow-nav a").click(function () {
         // clearInterval(timer);
         var $activeA = $("ul.main-slideshow-nav a.active");
         var index = $activeA.index();
         $activeA.removeClass("active");
-        $(".main-slideshow img").eq(index).fadeOut(1300);
+        $imgs.eq(index).fadeOut(400);
+        // $imgs.eq(index).stop();
         index = $(this).index();
         $("ul.main-slideshow-nav a").eq(index).addClass("active");
-        $(".main-slideshow img").eq(index).fadeIn(1200);
+        $imgs.eq(index).fadeIn(200);
     })
   },
   beforeDestroy() {
       clearInterval(this.timer);
-  }
+      this.timer = null;
+  },
 }
 </script>
 

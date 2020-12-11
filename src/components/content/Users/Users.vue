@@ -46,7 +46,7 @@
               <i class="el-icon-edit"></i>
             </el-button>
             <!-- 用于删除用户的按钮 -->
-            <el-button size="mini" type="danger">
+            <el-button size="mini" type="danger" @click="toDeleteUser(scope.row.id)">
               <i class="el-icon-delete"></i>
             </el-button>
             <!-- 用于为用户分配角色的按钮 -->
@@ -71,6 +71,7 @@
     <div class="dialog">
       <add-user :dialogVisible="showDialog.add" @close="closeDialog('add')" @addUser="handleNewUser"/>
       <update-user :dialogVisible="showDialog.update" :userId="unstableUserId" @close="closeDialog('update')" @updateUser="handleUpdatedUser"/>
+      <delete-user v-if="showDialog.delete" :userId="unstableUserId" @close="closeDialog('delete')" @deleteUser="handleDeletedUser"/>
     </div>
   </div>
 </template>
@@ -79,11 +80,14 @@
 <script>
 import AddUser from './NewUser'
 import UpdateUser from './UpdateUser'
+import DeleteUser from './DeleteUser'
+
 export default {
   name: 'Users',
   components: {
     AddUser,
-    UpdateUser
+    UpdateUser,
+    DeleteUser
   },
   data() {
     return {
@@ -154,10 +158,16 @@ export default {
     toUpdateUser(userId) {
       this.showDialog.update = true;
       this.unstableUserId = userId;
-      console.log(this.unstableUserId);
     },
     handleUpdatedUser(userName) {
       this.queryInfo.query = userName;
+      this.getUsers();
+    },
+    toDeleteUser(userId) {
+      this.unstableUserId = userId;
+      this.showDialog.delete = true;
+    },
+    handleDeletedUser() {
       this.getUsers();
     },
     // 根据键值关闭对话框
@@ -176,6 +186,7 @@ export default {
 
 <!-- -->
 <style lang="scss" scoped>
+@import '@css/mixin.scss';
 .users {
   padding: 20px;
   box-sizing: border-box;
@@ -183,8 +194,7 @@ export default {
 
 .el-card {
   margin-top: 20px;
-  box-shadow: 0 2px 5px rgba($color: #000000, $alpha: 0.1);
-  min-width:1200px;
+  @include el-card-style;
 }
 
 .search-box {
@@ -207,6 +217,9 @@ export default {
 
 .el-pagination {
   margin-top: 15px;
+  /deep/ li.number:not(.active) {
+    color: #bbb
+  }
 }
 
 </style>

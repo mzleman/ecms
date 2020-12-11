@@ -15,7 +15,6 @@
         </el-button>
       </div>
     </el-header>
-    <!------>
     <el-container class="aside main">
       <!-- 左侧边栏 -->
       <el-aside width="245px">
@@ -45,8 +44,11 @@
 
 
 <script>
-import {delUserToken} from '@/state/token'
-import {getActivePath, setActivePath} from './funcs.js'
+import {delUserToken} from '@/state/token.js'
+import {
+  getActivePath, 
+  setActivePath
+} from './funcs.js';
 
 export default {
   name: 'Home',
@@ -79,13 +81,14 @@ export default {
       }
     },
     menuClick(item) {
-      setActivePath(item.path);
-      this.$router.push(item.path);
+        this.$router.push(item.path);  
     }
   },
   created() {
     this.getMenuList();
-    this.activePath = getActivePath();
+  },
+  updated() {
+    this.activePath = this.$route.meta.active;
   }
 }
 </script>
@@ -124,6 +127,7 @@ export default {
     background-color: bisque;
     background-color: #323744;
   }
+  
   /deep/ .el-menu {
     background-color: transparent;
     border: none;
@@ -142,16 +146,18 @@ export default {
     position: relative;
     overflow: auto;
     &::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     &::-webkit-scrollbar-thumb {
-      background: rgba(255, 99, 71, .3);
+      // background: rgba(255, 99, 71, .3);
+      background-color: rgba(#323744, 0.4);
       // background-color: #fff;
       border-radius: 4px;
     }
     &::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 99, 71, .9);
-      border-radius: 2px;
+      background-color: rgba(#323744, 0.8);
+      // background: rgba(255, 99, 71, .9);
+      border-radius: 5px;
     }
   }
 </style>>

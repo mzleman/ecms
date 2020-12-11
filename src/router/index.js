@@ -4,9 +4,11 @@ import {getUserToken} from '@/state/token'
 
 const Login = () => import('@views/Login/Login.vue');
 const Home = () => import('@views/Home/Home.vue');
-const Users = () => import('@views/Home/ChildCompos/Users.vue');
+const Users = () => import('@components/content/Users/Users.vue');
 const Profile = () => import('@views/Profile/Profile.vue');
 const XiaoMi = () => import('@components/XiaoMi/XiaoMi.vue');
+const Rights = () => import('@components/content/rights/Rights.vue');
+const Roles = () => import('@components/content/roles/Roles.vue');
 
 Vue.use(VueRouter)
 
@@ -21,13 +23,23 @@ const routes = [
     children: [
       {
         path: 'welcome',
-        component: XiaoMi
+        component: XiaoMi,
+        meta: { active: 'welcome' }
       }, {
         path: 'users',
-        component: Users
+        component: Users,
+        meta: { active: 'users' }
+      }, {
+        path: 'rights',
+        component: Rights,
+        meta: { active: 'rights' }
+      }, {
+        path: 'roles',
+        component: Roles,
+        meta: { active: 'roles' }
       }
     ]
-  }, {
+  },  {
     path: '/login',
     component: Login
   }, {
@@ -61,4 +73,9 @@ let guard = (to, from, next) => {
 
 router.beforeEach(guard);
 
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
 export default router
