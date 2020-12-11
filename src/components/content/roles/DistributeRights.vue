@@ -145,13 +145,12 @@ export default {
 
 <style scoped lang="scss">
 .el-row {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   span {
     font: {
       size: 16px;
-      // weight: bold;
     }
   }
 }
@@ -162,21 +161,12 @@ export default {
       width: 10px;
     }
     &::-webkit-scrollbar-thumb {
-      // background: rgba(255, 99, 71, .3);
       background-color: rgba(#323744, 0.4);
-      // background-color: #fff;
       border-radius: 4px;
     }
     &::-webkit-scrollbar-thumb:hover {
       background-color: rgba(#323744, 0.8);
-      // background: rgba(255, 99, 71, .9);
       border-radius: 5px;
     }
 }
-// .distribute-rights {
-//   /deep/ .el-dialog__body {
-//     max-height: 600px;
-//     overflow: auto;
-//   }
-// }
 </style>

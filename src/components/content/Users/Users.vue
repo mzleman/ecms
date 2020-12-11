@@ -51,7 +51,9 @@
             </el-button>
             <!-- 用于为用户分配角色的按钮 -->
             <el-tooltip content="分配角色" placement="top" :enterable="false" :hide-after="700">
-              <el-button size="mini" type="warning"><i class="el-icon-setting"></i></el-button>
+              <el-button size="mini" type="warning" @click="toDistributeRole(scope.row)">
+                <i class="el-icon-setting"></i>
+              </el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -72,22 +74,26 @@
       <add-user :dialogVisible="showDialog.add" @close="closeDialog('add')" @addUser="handleNewUser"/>
       <update-user :dialogVisible="showDialog.update" :userId="unstableUserId" @close="closeDialog('update')" @updateUser="handleUpdatedUser"/>
       <delete-user v-if="showDialog.delete" :userId="unstableUserId" @close="closeDialog('delete')" @deleteUser="handleDeletedUser"/>
+      <distribute-role :dialogVisible="showDialog.distribute" :user="unstableUser" @close="closeDialog('distribute')"/>
     </div>
   </div>
 </template>
 
 <!---->
 <script>
-import AddUser from './NewUser'
-import UpdateUser from './UpdateUser'
-import DeleteUser from './DeleteUser'
+import AddUser from './NewUser';
+import UpdateUser from './UpdateUser';
+import DeleteUser from './DeleteUser';
+import DistributeRole from './DistributeRole';
+import {isEmptyObject} from '@/utils/object.js';
 
 export default {
   name: 'Users',
   components: {
     AddUser,
     UpdateUser,
-    DeleteUser
+    DeleteUser,
+    DistributeRole
   },
   data() {
     return {
@@ -99,10 +105,12 @@ export default {
       users: [],
       totalUserCount: 0,
       unstableUserId: NaN,
+      unstableUser: {},
       showDialog: {
         add: false,
         update: false,
-        delete: false
+        delete: false,
+        distribute: false
       }
     }
   },
@@ -154,7 +162,7 @@ export default {
       this.queryInfo.query = userName;
       this.getUsers();
     },
-    // 用户点击编辑某个用户的数据
+    // 处理用户点击编辑某个用户的数据
     toUpdateUser(userId) {
       this.showDialog.update = true;
       this.unstableUserId = userId;
@@ -163,6 +171,7 @@ export default {
       this.queryInfo.query = userName;
       this.getUsers();
     },
+    // 处理用户点击"删除用户"按钮
     toDeleteUser(userId) {
       this.unstableUserId = userId;
       this.showDialog.delete = true;
@@ -170,11 +179,24 @@ export default {
     handleDeletedUser() {
       this.getUsers();
     },
+    // 处理用户点击"分配角色"按钮
+    toDistributeRole(role) {
+      // console.log(role);
+      this.showDialog.distribute = true;
+      this.unstableUser = role;
+    },
+    handleDistributedUser() {
+      this.queryInfo.query = userName;
+      this.getUsers();
+    },
     // 根据键值关闭对话框
     closeDialog(key) {
       this.showDialog[key] = false;
       if(!isNaN(this.unstableUserId)) {
         this.unstableUserId = NaN; // 将刚才编辑的用户id重置为空
+      }
+      if(!isEmptyObject(this.unstableUser)) {
+        this.unstableUser = {};
       }
     },
   },

@@ -24,7 +24,9 @@ import {
   Dialog,
   MessageBox,
   Tag,
-  Tree
+  Tree,
+  Select,
+  Option
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Vue from 'vue'
@@ -52,6 +54,8 @@ Vue.use(Button)
   .use(Tooltip)
   .use(Dialog)
   .use(Tag)
-  .use(Tree);
+  .use(Tree)
+  .use(Select)
+  .use(Option);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;
